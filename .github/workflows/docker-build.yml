@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_ORG: ${{ vars.DOCKERHUB_ORG || 'gns3' }}
 
     steps:
     - name: Checkout code
@@ -53,7 +55,7 @@ jobs:
         context: .
         push: true
         tags: |
-          ${{ vars.DOCKERHUB_ORG != '' && vars.DOCKERHUB_ORG || 'gns3 }}/${{ github.event.repository.name }}:${{ steps.ver.outputs.tag }}
-          ${{ vars.DOCKERHUB_ORG != '' && vars.DOCKERHUB_ORG || 'gns3 }}/${{ github.event.repository.name }}:latest
+          ${{ env.DOCKERHUB_ORG }}/${{ github.event.repository.name }}:${{ steps.ver.outputs.tag }}
+          ${{ env.DOCKERHUB_ORG }}/${{ github.event.repository.name }}:latest
           ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ steps.ver.outputs.tag }}
           ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
