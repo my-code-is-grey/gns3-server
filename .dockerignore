@@ -3,9 +3,10 @@
 .gitignore
 .gitattributes
 
-# CI / GitHub
+# CI / GitHub / Docker
 .github
 .whitesource
+.dockerignore
 
 # Editor / IDE
 .idea
